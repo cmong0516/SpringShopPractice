@@ -1,17 +1,16 @@
 package mong.shop.domain.dto.request;
 
-import javax.validation.constraints.NotNull;
-import lombok.Getter;
+import javax.validation.constraints.NotEmpty;
+import lombok.Data;
 
-@Getter
+@Data
 public class MemberForm {
 
-    @NotNull
+    @NotEmpty
     private String name;
-    @NotNull
-    private String city;
-    @NotNull
-    private String street;
-    @NotNull
-    private String zipcode;
+    @NotEmpty
+    private String password;
+    @NotEmpty
+    private String email;
+
 }
