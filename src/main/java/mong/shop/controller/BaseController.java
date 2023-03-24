@@ -1,10 +1,13 @@
 package mong.shop.controller;
 
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mong.shop.domain.dto.request.MemberForm;
 import mong.shop.domain.dto.request.MemberLoginForm;
+import mong.shop.domain.dto.response.MemberResponseDto;
+import mong.shop.exception.PasswordException;
 import mong.shop.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,5 +57,34 @@ public class BaseController {
 
         return "members/loginForm";
 
+    }
+
+    @PostMapping("/members/login")
+    public String signIn(@Valid MemberLoginForm form, BindingResult bindingResult, Model model) {
+
+        log.info(form.getName());
+        log.info(form.getPassword());
+
+        if (bindingResult.hasErrors()) {
+            return "members/loginForm";
+        }
+
+        try {
+            memberService.login(form);
+        } catch (PasswordException e) {
+            model.addAttribute("exception",e);
+        }
+
+        return "members/loginForm";
+    }
+
+    @GetMapping("/members")
+    public String members(Model model) {
+
+        List<MemberResponseDto> allMembers = memberService.findAll();
+
+        model.addAttribute("members", allMembers);
+
+        return "members/memberList";
     }
 }

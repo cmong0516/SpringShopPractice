@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mong.shop.Auditing.BaseTimeEntity;
 import mong.shop.domain.dto.request.MemberForm;
@@ -13,6 +14,7 @@ import mong.shop.domain.dto.request.MemberForm;
 @Entity
 @NoArgsConstructor
 @Table(name = "USERS")
+@Getter
 public class User extends BaseTimeEntity {
 
     @Id
