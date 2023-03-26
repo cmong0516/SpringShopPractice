@@ -4,6 +4,7 @@ import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mong.shop.domain.dto.request.CreateItemForm;
 import mong.shop.domain.dto.request.MemberForm;
 import mong.shop.domain.dto.request.MemberLoginForm;
 import mong.shop.domain.dto.response.MemberResponseDto;
@@ -89,5 +90,10 @@ public class BaseController {
     }
 
     @GetMapping("/items/new")
-    public String
+    public String newItemPage(Model model) {
+        model.addAttribute("form", new CreateItemForm());
+        return "/items/createItemForm";
+    }
+
+
 }
