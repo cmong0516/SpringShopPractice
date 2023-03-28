@@ -73,12 +73,6 @@ public class BaseController {
             return "members/loginForm";
         }
 
-        try {
-            memberService.login(form);
-        } catch (PasswordException e) {
-            model.addAttribute("exception",e);
-        }
-
         return "members/loginForm";
     }
 
@@ -112,5 +106,11 @@ public class BaseController {
         model.addAttribute("items", allItems);
 
         return "/items/itemList";
+    }
+
+    @GetMapping("/items/update")
+    public String updateItemPage(Model model) {
+        model.addAttribute("form", new CreateItemForm());
+        return "/items/updateItemForm";
     }
 }

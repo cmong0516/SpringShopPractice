@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import mong.shop.Auditing.BaseTimeEntity;
 import mong.shop.domain.dto.request.MemberForm;
 
