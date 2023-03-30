@@ -21,4 +21,12 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom {
                 .from(item)
                 .fetch();
     }
+
+    @Override
+    public ItemResponseDto findById(Long id) {
+        return jpaQueryFactory.select(new QItemResponseDto(item.id, item.name, item.price, item.quantity))
+                .from(item)
+                .where(item.id.eq(id))
+                .fetchOne();
+    }
 }

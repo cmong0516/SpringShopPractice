@@ -1,6 +1,7 @@
 package mong.shop.service;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.CreateItemForm;
 import mong.shop.domain.dto.response.ItemResponseDto;
@@ -25,5 +26,9 @@ public class ItemService {
 
     public List<ItemResponseDto> findAllItems() {
         return itemRepositoryCustom.findAllItems();
+    }
+
+    public ItemResponseDto findById(Long id) {
+        return itemRepositoryCustom.findById(id);
     }
 }

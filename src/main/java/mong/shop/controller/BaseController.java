@@ -117,8 +117,15 @@ public class BaseController {
 
     @GetMapping("/items/{id}/edit")
     public String itemEditPage(@PathVariable Long id,Model model) {
-        model.addAttribute("form", new CreateItemForm());
+        ItemResponseDto byId = itemService.findById(id);
+
+        model.addAttribute("form", byId);
 
         return "items/updateItemForm";
+    }
+
+    @PostMapping("/items/{id}/edit")
+    public String itemUpdate(@PathVariable Long id,ItemUpdateRequest itemUpdateRequest) {
+
     }
 }

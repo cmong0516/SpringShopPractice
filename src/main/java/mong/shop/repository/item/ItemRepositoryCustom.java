@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface ItemRepositoryCustom {
 
     public List<ItemResponseDto> findAllItems();
+
+    public ItemResponseDto findById(Long id);
 }
