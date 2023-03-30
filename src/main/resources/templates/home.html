@@ -22,5 +22,12 @@
     </div>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
+<script th:inline="javascript">
+    let message = [[${message}]];
+    if (message != null) {
+        alert(message);
+    }
+
+</script>
 </body>
 </html>

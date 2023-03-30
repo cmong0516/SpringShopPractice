@@ -10,7 +10,6 @@ import mong.shop.domain.dto.request.MemberForm;
 import mong.shop.domain.dto.request.MemberLoginForm;
 import mong.shop.domain.dto.response.ItemResponseDto;
 import mong.shop.domain.dto.response.MemberResponseDto;
-import mong.shop.exception.PasswordException;
 import mong.shop.service.ItemService;
 import mong.shop.service.MemberService;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +29,10 @@ public class BaseController {
     private final ItemService itemService;
 
     @GetMapping("/")
-    public String hello() {
+    public String hello(@RequestParam(required = false) String message,Model model) {
+
+        model.addAttribute("message", message);
+
         return "home";
     }
 
@@ -42,17 +45,15 @@ public class BaseController {
     }
 
     @PostMapping("/members/new")
-    public String signIn(@Valid MemberForm form, BindingResult bindingResult) {
-
-        log.info(form.getName());
-        log.info(form.getPassword());
-        log.info(form.getEmail());
+    public String signIn(@Valid MemberForm form, BindingResult bindingResult,Model model) {
 
         if (bindingResult.hasErrors()) {
             return "members/createMemberForm";
         }
 
         memberService.join(form);
+
+        model.addAttribute("message", "회원가입이 완료되었습니다.");
 
         return "redirect:/";
     }
