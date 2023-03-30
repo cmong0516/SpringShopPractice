@@ -1,5 +1,6 @@
 package mong.shop.service;
 
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.entity.Item;
 import mong.shop.domain.entity.Order;
@@ -19,13 +20,15 @@ public class OrderService {
     private final OrderJpaRepository orderJpaRepository;
     private final OrderRepositoryCustom orderRepositoryCustom;
 
+    @Transactional
     public void order(Long memberId, Long itemId, Long count) {
         User user = memberJpaRepository.findById(memberId).get();
         Item item = itemJpaRepository.findById(itemId).get();
 
         Order order = new Order(user);
-        order.addItems(item);
-
+        order.addItems(item,count);
         orderJpaRepository.save(order);
+
+        item.order(count);
     }
 }

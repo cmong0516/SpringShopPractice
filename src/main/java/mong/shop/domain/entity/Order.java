@@ -10,9 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "ORDERS")
+@NoArgsConstructor
 public class Order {
 
     @Id
@@ -22,12 +24,14 @@ public class Order {
     @ManyToOne
     private User user;
 
+    private Long quantity;
+
     @OneToMany
-    @JoinColumn(name = "order_id")
     private List<Item> items = new ArrayList<>();
 
-    public void addItems(Item item) {
+    public void addItems(Item item,Long quantity) {
         this.items.add(item);
+        this.quantity = quantity;
     }
 
     public Order(User user) {

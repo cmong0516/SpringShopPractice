@@ -155,9 +155,10 @@ public class BaseController {
 
     @PostMapping("/order")
     public String orderItem(@RequestParam("memberId") Long memberId, @RequestParam("itemId") Long itemId,
-                            @RequestParam("count") Long count) {
+                            @RequestParam("count") Long count,Model model) {
 
         orderService.order(memberId,itemId,count);
-        return null;
+        model.addAttribute("message", "주문이 완료되었습니다.");
+        return "redirect:/";
     }
 }

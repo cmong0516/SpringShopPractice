@@ -44,4 +44,8 @@ public class Item {
 
         return this;
     }
+
+    public void order(Long count) {
+        this.quantity -= count;
+    }
 }
