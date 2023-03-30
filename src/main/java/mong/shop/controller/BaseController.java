@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mong.shop.domain.dto.request.CreateItemForm;
+import mong.shop.domain.dto.request.ItemUpdateRequest;
 import mong.shop.domain.dto.request.MemberForm;
 import mong.shop.domain.dto.request.MemberLoginForm;
 import mong.shop.domain.dto.response.ItemResponseDto;
@@ -125,7 +126,12 @@ public class BaseController {
     }
 
     @PostMapping("/items/{id}/edit")
-    public String itemUpdate(@PathVariable Long id,ItemUpdateRequest itemUpdateRequest) {
+    public String itemUpdate(@PathVariable Long id, ItemUpdateRequest itemUpdateRequest,Model model) {
 
+        ItemResponseDto itemResponseDto = itemService.updateItem(itemUpdateRequest);
+
+        model.addAttribute("form", itemResponseDto);
+
+        return "items/updateItemForm";
     }
 }

@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mong.shop.domain.dto.request.CreateItemForm;
+import mong.shop.domain.dto.request.ItemUpdateRequest;
 
 @Entity
 @Getter
@@ -33,5 +34,14 @@ public class Item {
         this.name = form.getName();
         this.price = form.getPrice();
         this.quantity = form.getStockQuantity();
+    }
+
+    public Item updateItem(ItemUpdateRequest itemUpdateRequest) {
+        this.id = itemUpdateRequest.getId();
+        this.name = itemUpdateRequest.getName();
+        this.price = itemUpdateRequest.getPrice();
+        this.quantity = itemUpdateRequest.getQuantity();
+
+        return this;
     }
 }

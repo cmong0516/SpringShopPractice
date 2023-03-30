@@ -1,9 +1,9 @@
 package mong.shop.service;
 
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.CreateItemForm;
+import mong.shop.domain.dto.request.ItemUpdateRequest;
 import mong.shop.domain.dto.response.ItemResponseDto;
 import mong.shop.domain.entity.Item;
 import mong.shop.repository.item.ItemJpaRepository;
@@ -30,5 +30,15 @@ public class ItemService {
 
     public ItemResponseDto findById(Long id) {
         return itemRepositoryCustom.findById(id);
+    }
+
+    public ItemResponseDto updateItem(ItemUpdateRequest itemUpdateRequest) {
+        Item findItem = itemJpaRepository.findById(itemUpdateRequest.getId()).get();
+
+        findItem.updateItem(itemUpdateRequest);
+
+        itemJpaRepository.save(findItem);
+
+        return itemRepositoryCustom.findById(findItem.getId());
     }
 }

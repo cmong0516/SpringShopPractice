@@ -8,6 +8,6 @@ public class ItemUpdateRequest {
     private Long id;
     private String name;
     private Long price;
-    private Long quantity;
+    private int quantity;
 
 }
