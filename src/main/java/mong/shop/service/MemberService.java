@@ -1,6 +1,7 @@
 package mong.shop.service;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.MemberForm;
 import mong.shop.domain.dto.response.MemberResponseDto;

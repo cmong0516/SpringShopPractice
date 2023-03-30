@@ -23,6 +23,7 @@
             <label th:for="email">이메일</label>
             <input type="email" th:field="*{email}" class="form-control" placeholder="이메일을 입력하세요"> </div>
         <button type="submit" class="btn btn-primary">가입하기</button>
+        <a class="btn btn-secondary" href="/">취소</a>
     </form>
     <br/>
     <div th:replace="fragments/footer :: footer" />

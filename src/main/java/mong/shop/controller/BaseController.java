@@ -12,6 +12,7 @@ import mong.shop.domain.dto.response.ItemResponseDto;
 import mong.shop.domain.dto.response.MemberResponseDto;
 import mong.shop.service.ItemService;
 import mong.shop.service.MemberService;
+import mong.shop.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ public class BaseController {
 
     private final MemberService memberService;
     private final ItemService itemService;
+    private final OrderService orderService;
 
     @GetMapping("/")
     public String hello(@RequestParam(required = false) String message,Model model) {
@@ -137,5 +139,25 @@ public class BaseController {
         model.addAttribute("message", "상품 정보 변경이 완료되었습니다.");
 
         return "redirect:/";
+    }
+
+    @GetMapping("/order")
+    public String orderPage(Model model) {
+
+        List<MemberResponseDto> allMembers = memberService.findAll();
+        List<ItemResponseDto> allItems = itemService.findAllItems();
+
+        model.addAttribute("members", allMembers);
+        model.addAttribute("items", allItems);
+
+        return "order/orderForm";
+    }
+
+    @PostMapping("/order")
+    public String orderItem(@RequestParam("memberId") Long memberId, @RequestParam("itemId") Long itemId,
+                            @RequestParam("count") Long count) {
+
+        orderService.order(memberId,itemId,count);
+        return null;
     }
 }
