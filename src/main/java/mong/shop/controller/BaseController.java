@@ -96,8 +96,10 @@ public class BaseController {
     }
 
     @PostMapping("/items/new")
-    public String addItem(@Valid CreateItemForm createItemForm, BindingResult result) {
+    public String addItem(@Valid CreateItemForm createItemForm, BindingResult result,Model model) {
         itemService.saveItem(createItemForm);
+
+        model.addAttribute("message", "상품 등록이 완료되었습니다.");
 
         return "redirect:/";
     }
@@ -132,7 +134,8 @@ public class BaseController {
         ItemResponseDto itemResponseDto = itemService.updateItem(itemUpdateRequest);
 
         model.addAttribute("form", itemResponseDto);
+        model.addAttribute("message", "상품 정보 변경이 완료되었습니다.");
 
-        return "items/updateItemForm";
+        return "redirect:/";
     }
 }
