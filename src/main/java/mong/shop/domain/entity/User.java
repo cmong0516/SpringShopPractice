@@ -43,4 +43,8 @@ public class User extends BaseTimeEntity {
                 .password(form.getPassword())
                 .email(form.getEmail()).build();
     }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
+    }
 }
