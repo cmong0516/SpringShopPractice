@@ -7,13 +7,14 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mong.shop.Auditing.BaseTimeEntity;
 import mong.shop.domain.dto.request.CreateItemForm;
 import mong.shop.domain.dto.request.ItemUpdateRequest;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Item {
+public class Item extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

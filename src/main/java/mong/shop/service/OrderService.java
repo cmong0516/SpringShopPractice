@@ -1,7 +1,9 @@
 package mong.shop.service;
 
+import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import mong.shop.domain.dto.request.OrderSearch;
 import mong.shop.domain.entity.Item;
 import mong.shop.domain.entity.Order;
 import mong.shop.domain.entity.User;
@@ -30,5 +32,14 @@ public class OrderService {
         orderJpaRepository.save(order);
 
         item.order(count);
+    }
+
+    @Transactional
+    public void cancel(Long orderId) {
+
+    }
+
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepositoryCustom.findAll(orderSearch);
     }
 }

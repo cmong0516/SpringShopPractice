@@ -1,21 +1,22 @@
 package mong.shop.domain.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mong.shop.Auditing.BaseTimeEntity;
+import mong.shop.domain.dto.request.OrderStatus;
 
 @Entity
 @Table(name = "ORDERS")
 @NoArgsConstructor
-public class Order {
+@Getter
+public class Order extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +27,25 @@ public class Order {
 
     private Long quantity;
 
-    @OneToMany
-    private List<Item> items = new ArrayList<>();
+    private OrderStatus orderStatus;
+
+    private Long totalPrice;
+
+    @OneToOne
+    private Item item;
 
     public void addItems(Item item,Long quantity) {
-        this.items.add(item);
+        this.item = item;
         this.quantity = quantity;
+        this.orderStatus = OrderStatus.ORDER;
+        this.totalPrice = quantity * item.getPrice();
     }
 
     public Order(User user) {
         this.user = user;
+    }
+
+    public void cancel() {
+        this.orderStatus = OrderStatus.CANCEL;
     }
 }
