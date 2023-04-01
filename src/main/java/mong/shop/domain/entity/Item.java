@@ -49,4 +49,8 @@ public class Item extends BaseTimeEntity {
     public void order(Long count) {
         this.quantity -= count;
     }
+
+    public void orderCancel(Long count) {
+        this.quantity += count;
+    }
 }
