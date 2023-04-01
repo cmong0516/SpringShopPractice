@@ -4,6 +4,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.OrderSearch;
+import mong.shop.domain.dto.response.OrderResponseDto;
 import mong.shop.domain.entity.Item;
 import mong.shop.domain.entity.Order;
 import mong.shop.domain.entity.User;
@@ -39,7 +40,7 @@ public class OrderService {
 
     }
 
-    public List<Order> findOrders(OrderSearch orderSearch) {
-        return null;
+    public List<OrderResponseDto> findOrders(OrderSearch orderSearch) {
+        return orderRepositoryCustom.findOrderByName(orderSearch);
     }
 }

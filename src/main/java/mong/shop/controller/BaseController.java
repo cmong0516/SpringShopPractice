@@ -11,6 +11,7 @@ import mong.shop.domain.dto.request.MemberLoginForm;
 import mong.shop.domain.dto.request.OrderSearch;
 import mong.shop.domain.dto.response.ItemResponseDto;
 import mong.shop.domain.dto.response.MemberResponseDto;
+import mong.shop.domain.dto.response.OrderResponseDto;
 import mong.shop.domain.entity.Order;
 import mong.shop.service.ItemService;
 import mong.shop.service.MemberService;
@@ -169,7 +170,7 @@ public class BaseController {
     @GetMapping("/orders")
     public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
 
-        List<Order> orders = orderService.findOrders(orderSearch);
+        List<OrderResponseDto> orders = orderService.findOrders(orderSearch);
 
         model.addAttribute("orders",orders);
 

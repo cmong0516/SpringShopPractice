@@ -1,5 +1,6 @@
 package mong.shop.repository.order;
 
+import static mong.shop.domain.entity.QItem.item;
 import static mong.shop.domain.entity.QOrder.order;
 import static mong.shop.domain.entity.QUser.user;
 
@@ -9,7 +10,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.OrderSearch;
 import mong.shop.domain.dto.request.OrderStatus;
-import mong.shop.domain.entity.Order;
+import mong.shop.domain.dto.response.OrderResponseDto;
+import mong.shop.domain.dto.response.QOrderResponseDto;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -20,17 +22,18 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<Order> findOrderByName(OrderSearch orderSearch) {
-
-        return jpaQueryFactory.select(order)
+    public List<OrderResponseDto> findOrderByName(OrderSearch orderSearch) {
+        return jpaQueryFactory.select(new QOrderResponseDto(order.id,order.user.name, order.item.name,order.totalPrice,order.quantity,
+                order.orderStatus, order.createdDate))
                 .from(order)
-                .join(order.user, user)
-                .where(statusEq(orderSearch.getOrderStatus()),
-                        nameLike(orderSearch.getMemberName()))
-                .limit(1000)
+                .where(nameLike(orderSearch.getMemberName()))
+                .where(statusEq(orderSearch.getOrderStatus()))
+                .join(order.item, item)
+                .join(order.user,user)
                 .fetch();
-
     }
+
+
 
     private BooleanExpression statusEq(OrderStatus orderStatus) {
         if (orderStatus == null) {
@@ -47,4 +50,6 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
         return user.name.like(nameCond);
     }
+
+
 }
