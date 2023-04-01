@@ -1,5 +1,6 @@
 package mong.shop.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class User extends BaseTimeEntity {
     private String password;
     private String email;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 

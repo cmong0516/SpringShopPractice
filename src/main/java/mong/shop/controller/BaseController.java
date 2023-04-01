@@ -11,7 +11,6 @@ import mong.shop.domain.dto.request.MemberLoginForm;
 import mong.shop.domain.dto.request.OrderSearch;
 import mong.shop.domain.dto.response.ItemResponseDto;
 import mong.shop.domain.dto.response.MemberResponseDto;
-import mong.shop.domain.dto.response.OrderResponseDto;
 import mong.shop.domain.entity.Order;
 import mong.shop.service.ItemService;
 import mong.shop.service.MemberService;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
