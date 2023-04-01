@@ -181,8 +181,8 @@ public class BaseController {
     public String orderCancel(@PathVariable Long id, Model model) {
 
         OrderResponseDto updatedOrder = orderService.cancel(id);
-        model.addAttribute("orders",updatedOrder);
+        model.addAttribute("message", "주문이 취소되었습니다.");
 
-        return "order/orderList";
+        return "redirect:/";
     }
 }
