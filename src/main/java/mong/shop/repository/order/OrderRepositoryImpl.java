@@ -33,6 +33,15 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
                 .fetch();
     }
 
+    @Override
+    public OrderResponseDto findOrder(Long id) {
+        return jpaQueryFactory.select(new QOrderResponseDto(order.id,order.user.name,order.item.name,order.totalPrice,order.quantity,order.orderStatus,order.createdDate))
+                .from(order)
+                .where(order.id.eq(id))
+                .join(order.item, item)
+                .join(order.user,user)
+                .fetchOne();
+    }
 
 
     private BooleanExpression statusEq(OrderStatus orderStatus) {

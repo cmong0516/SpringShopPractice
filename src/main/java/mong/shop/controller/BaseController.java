@@ -176,4 +176,13 @@ public class BaseController {
 
         return "order/orderList";
     }
+
+    @PostMapping("/orders/{id}/cancel")
+    public String orderCancel(@PathVariable Long id, Model model) {
+
+        OrderResponseDto updatedOrder = orderService.cancel(id);
+        model.addAttribute("orders",updatedOrder);
+
+        return "order/orderList";
+    }
 }

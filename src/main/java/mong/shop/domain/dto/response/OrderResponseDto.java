@@ -2,6 +2,7 @@ package mong.shop.domain.dto.response;
 
 import com.querydsl.core.annotations.QueryProjection;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import lombok.Data;
 import mong.shop.domain.dto.request.OrderStatus;
 
@@ -13,7 +14,7 @@ public class OrderResponseDto {
     private Long orderPrice;
     private Long orderQuantity;
     private OrderStatus orderStatus;
-    private LocalDateTime orderTime;
+    private String orderTime;
 
     @QueryProjection
     public OrderResponseDto(Long id,String userName, String itemName, Long orderPrice, Long orderQuantity,
@@ -24,6 +25,6 @@ public class OrderResponseDto {
         this.orderPrice = orderPrice;
         this.orderQuantity = orderQuantity;
         this.orderStatus = orderStatus;
-        this.orderTime = orderTime;
+        this.orderTime = orderTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepositoryCustom {
     List<OrderResponseDto> findOrderByName(OrderSearch orderSearch);
+
+    OrderResponseDto findOrder(Long id);
 }

@@ -36,8 +36,11 @@ public class OrderService {
     }
 
     @Transactional
-    public void cancel(Long orderId) {
+    public OrderResponseDto cancel(Long orderId) {
+        Order order = orderJpaRepository.findById(orderId).get();
+        order.cancel();
 
+        return orderRepositoryCustom.findOrder(orderId);
     }
 
     public List<OrderResponseDto> findOrders(OrderSearch orderSearch) {
