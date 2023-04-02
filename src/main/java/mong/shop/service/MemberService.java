@@ -1,7 +1,6 @@
 package mong.shop.service;
 
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.MemberForm;
 import mong.shop.domain.dto.response.MemberResponseDto;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MemberService {
+public class MemberService{
 
     private final MemberJpaRepository memberJpaRepository;
     private final MemberRepositoryCustom memberRepositoryCustom;
@@ -31,4 +30,5 @@ public class MemberService {
     public List<MemberResponseDto> findAll() {
         return memberRepositoryCustom.findAllMembers();
     }
+
 }

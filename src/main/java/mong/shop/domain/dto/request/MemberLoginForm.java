@@ -7,7 +7,7 @@ import lombok.Data;
 public class MemberLoginForm {
 
     @NotNull
-    private String name;
+    private String email;
     @NotNull
     private String password;
 }

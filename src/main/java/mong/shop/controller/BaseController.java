@@ -12,7 +12,7 @@ import mong.shop.domain.dto.request.OrderSearch;
 import mong.shop.domain.dto.response.ItemResponseDto;
 import mong.shop.domain.dto.response.MemberResponseDto;
 import mong.shop.domain.dto.response.OrderResponseDto;
-import mong.shop.domain.entity.Order;
+import mong.shop.domain.entity.Role;
 import mong.shop.service.ItemService;
 import mong.shop.service.MemberService;
 import mong.shop.service.OrderService;
@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -71,19 +70,6 @@ public class BaseController {
 
         return "members/loginForm";
 
-    }
-
-    @PostMapping("/members/login")
-    public String signIn(@Valid MemberLoginForm form, BindingResult bindingResult, Model model) {
-
-        log.info(form.getName());
-        log.info(form.getPassword());
-
-        if (bindingResult.hasErrors()) {
-            return "members/loginForm";
-        }
-
-        return "members/loginForm";
     }
 
     @GetMapping("/members")
@@ -184,5 +170,16 @@ public class BaseController {
         model.addAttribute("message", "주문이 취소되었습니다.");
 
         return "redirect:/";
+    }
+
+    @PostMapping("/members/login")
+    public String signIn(@Valid MemberLoginForm form, BindingResult bindingResult, Model model) {
+
+
+        if (bindingResult.hasErrors()) {
+            return "members/loginForm";
+        }
+
+        return "members/loginForm";
     }
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,9 +27,12 @@ public class User extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String email;
     private String name;
     private String password;
-    private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
@@ -38,6 +43,7 @@ public class User extends BaseTimeEntity {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.role = Role.ROLE_USER;
     }
 
     public static User memberFormToUserEntity(MemberForm form) {

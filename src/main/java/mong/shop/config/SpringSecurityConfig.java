@@ -23,7 +23,17 @@ public class SpringSecurityConfig {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
+                .antMatchers("/", "/home", "/login","/css/**","/js/**","/members/new")
+                .permitAll()
                 .anyRequest()
+                .hasRole("USER")
+                .and()
+                .formLogin()
+                .loginPage("/members/login")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/home")
                 .permitAll();
 
         return http.build();
