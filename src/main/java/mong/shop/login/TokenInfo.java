@@ -1,4 +1,4 @@
-package mong.shop.jwt;
+package mong.shop.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -172,14 +172,4 @@ public class BaseController {
         return "redirect:/";
     }
 
-    @PostMapping("/members/login")
-    public String signIn(@Valid MemberLoginForm form, BindingResult bindingResult, Model model) {
-
-
-        if (bindingResult.hasErrors()) {
-            return "members/loginForm";
-        }
-
-        return "members/loginForm";
-    }
 }
