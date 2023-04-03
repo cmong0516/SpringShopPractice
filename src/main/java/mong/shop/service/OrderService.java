@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.OrderSearch;
 import mong.shop.domain.dto.response.OrderResponseDto;
 import mong.shop.domain.entity.Item;
+import mong.shop.domain.entity.Member;
 import mong.shop.domain.entity.Order;
-import mong.shop.domain.entity.User;
 import mong.shop.repository.item.ItemJpaRepository;
 import mong.shop.repository.member.MemberJpaRepository;
 import mong.shop.repository.order.OrderJpaRepository;
@@ -25,10 +25,10 @@ public class OrderService {
 
     @Transactional
     public void order(Long memberId, Long itemId, Long count) {
-        User user = memberJpaRepository.findById(memberId).get();
+        Member member = memberJpaRepository.findById(memberId).get();
         Item item = itemJpaRepository.findById(itemId).get();
 
-        Order order = new Order(user);
+        Order order = new Order(member);
         order.addItems(item,count);
         orderJpaRepository.save(order);
 
@@ -40,10 +40,13 @@ public class OrderService {
         Order order = orderJpaRepository.findById(orderId).get();
         order.cancel();
 
-        return orderRepositoryCustom.findOrder(orderId);
+//        return orderRepositoryCustom.findOrder(orderId);
+        return null;
     }
 
     public List<OrderResponseDto> findOrders(OrderSearch orderSearch) {
-        return orderRepositoryCustom.findOrderByName(orderSearch);
+//        return orderRepositoryCustom.findOrderByName(orderSearch);
+
+        return null;
     }
 }

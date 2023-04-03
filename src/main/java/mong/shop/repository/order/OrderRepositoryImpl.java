@@ -2,7 +2,6 @@ package mong.shop.repository.order;
 
 import static mong.shop.domain.entity.QItem.item;
 import static mong.shop.domain.entity.QOrder.order;
-import static mong.shop.domain.entity.QUser.user;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -21,44 +20,44 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    @Override
-    public List<OrderResponseDto> findOrderByName(OrderSearch orderSearch) {
-        return jpaQueryFactory.select(new QOrderResponseDto(order.id,order.user.name, order.item.name,order.totalPrice,order.quantity,
-                order.orderStatus, order.createdDate))
-                .from(order)
-                .where(nameLike(orderSearch.getMemberName()))
-                .where(statusEq(orderSearch.getOrderStatus()))
-                .join(order.item, item)
-                .join(order.user,user)
-                .fetch();
-    }
+//    @Override
+//    public List<OrderResponseDto> findOrderByName(OrderSearch orderSearch) {
+//        return jpaQueryFactory.select(new QOrderResponseDto(order.id,order.user.name, order.item.name,order.totalPrice,order.quantity,
+//                order.orderStatus, order.createdDate))
+//                .from(order)
+//                .where(nameLike(orderSearch.getMemberName()))
+//                .where(statusEq(orderSearch.getOrderStatus()))
+//                .join(order.item, item)
+////                .join(order.member,QMember.member)
+//                .fetch();
+//    }
 
-    @Override
-    public OrderResponseDto findOrder(Long id) {
-        return jpaQueryFactory.select(new QOrderResponseDto(order.id,order.user.name,order.item.name,order.totalPrice,order.quantity,order.orderStatus,order.createdDate))
-                .from(order)
-                .where(order.id.eq(id))
-                .join(order.item, item)
-                .join(order.user,user)
-                .fetchOne();
-    }
+//    @Override
+//    public OrderResponseDto findOrder(Long id) {
+//        return jpaQueryFactory.select(new QOrderResponseDto(order.id,order.user.name,order.item.name,order.totalPrice,order.quantity,order.orderStatus,order.createdDate))
+//                .from(order)
+//                .where(order.id.eq(id))
+//                .join(order.item, item)
+////                .join(order.user,user)
+//                .fetchOne();
+//    }
 
 
-    private BooleanExpression statusEq(OrderStatus orderStatus) {
-        if (orderStatus == null) {
-            return null;
-        }
-
-        return order.orderStatus.eq(orderStatus);
-    }
-
-    private BooleanExpression nameLike(String nameCond) {
-        if (!StringUtils.hasText(nameCond)) {
-            return null;
-        }
-
-        return user.name.like(nameCond);
-    }
+//    private BooleanExpression statusEq(OrderStatus orderStatus) {
+//        if (orderStatus == null) {
+//            return null;
+//        }
+//
+//        return order.orderStatus.eq(orderStatus);
+//    }
+//
+//    private BooleanExpression nameLike(String nameCond) {
+//        if (!StringUtils.hasText(nameCond)) {
+//            return null;
+//        }
+//
+//        return .name.like(nameCond);
+//    }
 
 
 }

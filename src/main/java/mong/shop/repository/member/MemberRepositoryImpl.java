@@ -1,7 +1,5 @@
 package mong.shop.repository.member;
 
-import static mong.shop.domain.entity.QUser.user;
-
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +16,10 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
     @Override
     public List<MemberResponseDto> findAllMembers() {
 
-        return jpaQueryFactory.select(new QMemberResponseDto(user.id,user.name, user.email))
-                .from(user)
-                .fetch();
+//        return jpaQueryFactory.select(new QMemberResponseDto(user.id,user.name, user.email))
+//                .from(user)
+//                .fetch();
+
+        return null;
     }
 }

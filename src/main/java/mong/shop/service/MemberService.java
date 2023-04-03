@@ -4,7 +4,6 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.MemberForm;
 import mong.shop.domain.dto.response.MemberResponseDto;
-import mong.shop.domain.entity.User;
 import mong.shop.login.JwtTokenProvider;
 import mong.shop.login.TokenInfo;
 import mong.shop.repository.member.MemberJpaRepository;
@@ -29,9 +28,9 @@ public class MemberService{
 
         memberForm.setPassword(passwordEncoder.encode(memberForm.getPassword()));
 
-        User user = User.memberFormToUserEntity(memberForm);
+//        User user = User.memberFormToUserEntity(memberForm);
 
-        memberJpaRepository.save(user);
+//        memberJpaRepository.save(user);
     }
 
     public List<MemberResponseDto> findAll() {

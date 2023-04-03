@@ -1,9 +1,8 @@
 package mong.shop.domain.dto.response;
 
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.Builder;
 import lombok.Data;
-import mong.shop.domain.entity.User;
+import mong.shop.domain.entity.Member;
 
 @Data
 public class MemberResponseDto {
@@ -18,9 +17,9 @@ public class MemberResponseDto {
         this.email = email;
     }
 
-    public MemberResponseDto(User user) {
-        this.id = user.getId();
-        this.name = user.getName();
-        this.email = user.getEmail();
+    public MemberResponseDto(Member member) {
+        this.id = member.getId();
+        this.name = member.getName();
+        this.email = member.getEmail();
     }
 }

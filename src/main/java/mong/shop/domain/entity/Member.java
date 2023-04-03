@@ -11,20 +11,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mong.shop.Auditing.BaseTimeEntity;
-import mong.shop.domain.dto.request.MemberForm;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "USERS")
 @Getter
-public class User extends BaseTimeEntity implements UserDetails {
+public class Member extends BaseTimeEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,20 +36,6 @@ public class User extends BaseTimeEntity implements UserDetails {
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
-
-    @Builder
-    public User(String name, String password, String email) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.role = Role.ROLE_USER;
-    }
-
-    public static User memberFormToUserEntity(MemberForm form) {
-        return User.builder().name(form.getName())
-                .password(form.getPassword())
-                .email(form.getEmail()).build();
-    }
 
     public void addOrder(Order order) {
         this.orders.add(order);
@@ -101,3 +83,4 @@ public class User extends BaseTimeEntity implements UserDetails {
         return true;
     }
 }
+

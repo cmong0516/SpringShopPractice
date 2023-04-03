@@ -25,7 +25,7 @@ public class Order extends BaseTimeEntity {
 
     @JsonBackReference
     @ManyToOne
-    private User user;
+    private Member member;
 
     private Long quantity;
 
@@ -43,8 +43,8 @@ public class Order extends BaseTimeEntity {
         this.totalPrice = quantity * item.getPrice();
     }
 
-    public Order(User user) {
-        this.user = user;
+    public Order(mong.shop.domain.entity.Member member) {
+        this.member = member;
     }
 
     public void cancel() {
