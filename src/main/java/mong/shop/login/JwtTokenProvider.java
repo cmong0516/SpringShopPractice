@@ -71,7 +71,7 @@ public class JwtTokenProvider {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        new User(claims.getSubject(), "", authorities);
+        return null;
     }
 
     public boolean validateToken(String token) {
