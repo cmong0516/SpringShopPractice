@@ -7,12 +7,14 @@ import lombok.extern.slf4j.Slf4j;
 import mong.shop.domain.dto.request.CreateItemForm;
 import mong.shop.domain.dto.request.ItemUpdateRequest;
 import mong.shop.domain.dto.request.MemberForm;
+import mong.shop.domain.dto.request.MemberLoginDto;
 import mong.shop.domain.dto.request.MemberLoginForm;
 import mong.shop.domain.dto.request.OrderSearch;
 import mong.shop.domain.dto.response.ItemResponseDto;
 import mong.shop.domain.dto.response.MemberResponseDto;
 import mong.shop.domain.dto.response.OrderResponseDto;
 import mong.shop.domain.entity.Role;
+import mong.shop.login.TokenInfo;
 import mong.shop.service.ItemService;
 import mong.shop.service.MemberService;
 import mong.shop.service.OrderService;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -35,7 +38,7 @@ public class BaseController {
     private final OrderService orderService;
 
     @GetMapping("/")
-    public String hello(@RequestParam(required = false) String message,Model model) {
+    public String hello(@RequestParam(required = false) String message, Model model) {
 
         model.addAttribute("message", message);
 
@@ -51,7 +54,7 @@ public class BaseController {
     }
 
     @PostMapping("/members/new")
-    public String signIn(@Valid MemberForm form, BindingResult bindingResult,Model model) {
+    public String signIn(@Valid MemberForm form, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "members/createMemberForm";
@@ -89,7 +92,7 @@ public class BaseController {
     }
 
     @PostMapping("/items/new")
-    public String addItem(@Valid CreateItemForm createItemForm, BindingResult result,Model model) {
+    public String addItem(@Valid CreateItemForm createItemForm, BindingResult result, Model model) {
         itemService.saveItem(createItemForm);
 
         model.addAttribute("message", "상품 등록이 완료되었습니다.");
@@ -113,7 +116,7 @@ public class BaseController {
     }
 
     @GetMapping("/items/{id}/edit")
-    public String itemEditPage(@PathVariable Long id,Model model) {
+    public String itemEditPage(@PathVariable Long id, Model model) {
         ItemResponseDto byId = itemService.findById(id);
 
         model.addAttribute("form", byId);
@@ -122,7 +125,7 @@ public class BaseController {
     }
 
     @PostMapping("/items/{id}/edit")
-    public String itemUpdate(@PathVariable Long id, ItemUpdateRequest itemUpdateRequest,Model model) {
+    public String itemUpdate(@PathVariable Long id, ItemUpdateRequest itemUpdateRequest, Model model) {
 
         ItemResponseDto itemResponseDto = itemService.updateItem(itemUpdateRequest);
 
@@ -146,9 +149,9 @@ public class BaseController {
 
     @PostMapping("/order")
     public String orderItem(@RequestParam("memberId") Long memberId, @RequestParam("itemId") Long itemId,
-                            @RequestParam("count") Long count,Model model) {
+                            @RequestParam("count") Long count, Model model) {
 
-        orderService.order(memberId,itemId,count);
+        orderService.order(memberId, itemId, count);
         model.addAttribute("message", "주문이 완료되었습니다.");
         return "redirect:/";
     }
@@ -158,7 +161,7 @@ public class BaseController {
 
         List<OrderResponseDto> orders = orderService.findOrders(orderSearch);
 
-        model.addAttribute("orders",orders);
+        model.addAttribute("orders", orders);
 
         return "order/orderList";
     }
@@ -172,4 +175,11 @@ public class BaseController {
         return "redirect:/";
     }
 
+    @PostMapping("/member/login")
+    public TokenInfo login(@RequestBody MemberLoginDto loginForm) {
+        String memberId = loginForm.getEmail();
+        String password = loginForm.getPassword();
+
+        return memberService.login(memberId, password);
+    }
 }
