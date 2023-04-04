@@ -40,13 +40,10 @@ public class OrderService {
         Order order = orderJpaRepository.findById(orderId).get();
         order.cancel();
 
-//        return orderRepositoryCustom.findOrder(orderId);
-        return null;
+        return orderRepositoryCustom.findOrder(orderId);
     }
 
     public List<OrderResponseDto> findOrders(OrderSearch orderSearch) {
-//        return orderRepositoryCustom.findOrderByName(orderSearch);
-
-        return null;
+        return orderRepositoryCustom.findOrderByName(orderSearch);
     }
 }

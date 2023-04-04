@@ -34,7 +34,7 @@ public class Member extends BaseTimeEntity implements UserDetails {
     private Role role;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
     public void addOrder(Order order) {
