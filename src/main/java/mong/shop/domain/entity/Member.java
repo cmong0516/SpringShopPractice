@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mong.shop.Auditing.BaseTimeEntity;
+import mong.shop.domain.dto.request.MemberForm;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -36,6 +37,13 @@ public class Member extends BaseTimeEntity implements UserDetails {
     @JsonManagedReference
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
+
+    public Member(MemberForm form) {
+        this.email = form.getEmail();
+        this.name = form.getName();
+        this.password = form.getPassword();
+        this.role = Role.ROLE_GUEST;
+    }
 
     public void addOrder(Order order) {
         this.orders.add(order);

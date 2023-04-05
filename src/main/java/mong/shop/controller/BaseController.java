@@ -52,7 +52,7 @@ public class BaseController {
     }
 
     @PostMapping("/members/new")
-    public String signIn(@Valid MemberForm form, BindingResult bindingResult, Model model) {
+    public String signIn(@Valid MemberForm form, BindingResult bindingResult, Model model) throws Exception {
 
         if (bindingResult.hasErrors()) {
             return "members/createMemberForm";
