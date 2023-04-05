@@ -13,8 +13,6 @@ import mong.shop.domain.dto.request.OrderSearch;
 import mong.shop.domain.dto.response.ItemResponseDto;
 import mong.shop.domain.dto.response.MemberResponseDto;
 import mong.shop.domain.dto.response.OrderResponseDto;
-import mong.shop.domain.entity.Role;
-import mong.shop.login.TokenInfo;
 import mong.shop.service.ItemService;
 import mong.shop.service.MemberService;
 import mong.shop.service.OrderService;
@@ -173,13 +171,5 @@ public class BaseController {
         model.addAttribute("message", "주문이 취소되었습니다.");
 
         return "redirect:/";
-    }
-
-    @PostMapping("/member/login")
-    public TokenInfo login(@RequestBody MemberLoginDto loginForm) {
-        String memberId = loginForm.getEmail();
-        String password = loginForm.getPassword();
-
-        return memberService.login(memberId, password);
     }
 }

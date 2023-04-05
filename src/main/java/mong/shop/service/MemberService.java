@@ -4,8 +4,6 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mong.shop.domain.dto.request.MemberForm;
 import mong.shop.domain.dto.response.MemberResponseDto;
-import mong.shop.login.JwtTokenProvider;
-import mong.shop.login.TokenInfo;
 import mong.shop.repository.member.MemberJpaRepository;
 import mong.shop.repository.member.MemberRepositoryCustom;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
